@@ -8,7 +8,7 @@ const ScheduleList = () => {
     setUserrr(JSON.parse(localStorage.getItem("user")));
   }, []);
   const fetchData = useCallback(async () => {
-    const response = await fetch("http://localhost:8000/api/order")
+    const response = await fetch("diplomaback.vercel.app/api/order")
       .then((response) => response.json())
       .then(async (data) => filterData(data));
   }, [userrr]);

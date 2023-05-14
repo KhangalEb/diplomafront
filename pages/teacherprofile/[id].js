@@ -17,7 +17,7 @@ export default function TeacherProfile() {
     const { Panel } = Collapse;
     const fetchData = async () => {
         setSubject(localStorage.getItem("selectedCourse"));
-        return fetch("http://localhost:8000/api/teacherList")
+        return fetch("diplomaback.vercel.app/api/teacherList")
             .then((response) => response.json())
             .then((data) => setData(data));
     };
@@ -50,7 +50,7 @@ export default function TeacherProfile() {
         console.log(record);
         console.log(dataa);
         try {
-            const response = await fetch("http://localhost:8000/api/order", {
+            const response = await fetch("diplomaback.vercel.app/api/order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export default function TeacherProfile() {
         setDatatable(fData);
     };
     const fetchDataa = useCallback(async () => {
-        const response = await fetch("http://localhost:8000/api/timetableData");
+        const response = await fetch("diplomaback.vercel.app/api/timetableData");
         const data = await response.json();
         console.log(data);
 

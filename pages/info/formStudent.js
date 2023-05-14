@@ -39,7 +39,7 @@ const FormStudent = () => {
     const user = jwt.decode(token);
     console.log(user);
     try {
-      const res = await fetch(`http://localhost:8000/api/userData/${userrr._id}`, {
+      const res = await fetch(`diplomaback.vercel.app/api/userData/${userrr._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userrr),

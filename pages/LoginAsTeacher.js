@@ -35,7 +35,7 @@ const Login = () => {
   const handleSubmit1 = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/login", {
+      const response = await fetch("diplomaback.vercel.app/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +49,7 @@ const Login = () => {
       const data = await response.json();
       if (data.user) {
         localStorage.setItem("token", data.user);
-        const req = await fetch("http://localhost:8000/api/userData", {
+        const req = await fetch("diplomaback.vercel.app/api/userData", {
           method: "POST",
           headers: {
             authorization: `

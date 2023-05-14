@@ -6,7 +6,7 @@ const SubjectCard = () => {
   const [dataa, setData] = useState([]);
   console.log(dataa);
   const fetchData = async () => {
-    return fetch("http://localhost:8000/api/subjectData")
+    return fetch("diplomaback.vercel.app/api/subjectData")
       .then((response) => response.json())
       .then((data) => setData(data));
   };
@@ -16,7 +16,7 @@ const SubjectCard = () => {
   }, []);
   const handleClick = async (e) => {
     try {
-      const response = await fetch("http://localhost:8000/api/teacherListBySubjects", {
+      const response = await fetch("diplomaback.vercel.app/api/teacherListBySubjects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

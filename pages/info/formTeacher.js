@@ -23,7 +23,7 @@ const FormTeacher = () => {
   }, []);
   console.log(userrr);
   const fetchData = async () => {
-    return fetch("http://localhost:8000/api/subjectData")
+    return fetch("diplomaback.vercel.app/api/subjectData")
       .then((response) => response.json())
       .then((data) => setData(data));
   };
@@ -57,7 +57,7 @@ const FormTeacher = () => {
     console.log(user);
     // if (userrr.subject.length < 4) {
     try {
-      const res = await fetch(`http://localhost:8000/api/teacherData/${userrr._id}`, {
+      const res = await fetch(`diplomaback.vercel.app/api/teacherData/${userrr._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userrr),

@@ -7,7 +7,7 @@ const TeachersList = () => {
   const [dataa, setData] = useState([]);
   const router = useRouter();
   const fetchData = async () => {
-    return fetch("http://localhost:8000/api/teacherList")
+    return fetch("diplomaback.vercel.app/api/teacherList")
       .then((response) => response.json())
       .then((data) => setData(data));
   };

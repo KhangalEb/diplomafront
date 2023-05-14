@@ -24,15 +24,15 @@ const Checkout = () => {
     setSubject(localStorage.getItem("selectedCourse"));
     setUser(JSON.parse(localStorage.getItem("user")));
     console.log(subject);
-    await fetch("http://localhost:8000/api/order")
+    await fetch("diplomaback.vercel.app/api/order")
       .then((response) => response.json())
       .then(async (data) => {
         setDataOrder(data);
-        return await fetch("http://localhost:8000/api/teacherList")
+        return await fetch("diplomaback.vercel.app/api/teacherList")
           .then((response) => response.json())
           .then(async (teacherData) => {
             filterData(teacherData, data);
-            return await fetch("http://localhost:8000/api/timetableData")
+            return await fetch("diplomaback.vercel.app/api/timetableData")
               .then((response) => response.json())
               .then((orderdata) => {
                 filterDataa(orderdata, data);
@@ -64,7 +64,7 @@ const Checkout = () => {
   console.log(orderTable);
   const handleClick = async (id) => {
     const response = await fetch(
-      `http://localhost:8000/api/orderwindowData/${id}`,
+      `diplomaback.vercel.app/api/orderwindowData/${id}`,
       {
         method: "PUT",
         headers: {

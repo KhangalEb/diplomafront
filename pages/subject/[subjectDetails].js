@@ -27,7 +27,7 @@ const SubjectDetails = () => {
     }
   });
   // const fetchData = async () => {
-  //   return fetch("http://localhost:8000/api/teacherListBySubjects",)
+  //   return fetch("diplomaback.vercel.app/api/teacherListBySubjects",)
   //     .then((response) => response.json())
   //     .then((data) => setData(data));
   // };
