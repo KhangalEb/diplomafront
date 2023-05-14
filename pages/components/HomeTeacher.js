@@ -27,7 +27,7 @@ export default function Home() {
     fetchData();
   }, []);
   const fetchDataa = async () => {
-    await fetch("diplomaback.vercel.app/api/order")
+    await fetch("https://diplomaback.vercel.app/api/order")
       .then((response) => response.json())
       .then(async (data) => setTableData(data));
   };
@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   const fetchData = useCallback(async () => {
-    const response = await fetch("diplomaback.vercel.app/api/timetableData");
+    const response = await fetch("https://diplomaback.vercel.app/api/timetableData");
     const data = await response.json();
     console.log(data);
 
@@ -98,7 +98,7 @@ export default function Home() {
     } else {
       try {
         const response = await fetch(
-          "diplomaback.vercel.app/api/timetableData",
+          "https://diplomaback.vercel.app/api/timetableData",
           {
             method: "POST",
             headers: {
@@ -127,7 +127,7 @@ export default function Home() {
   };
   const handleDelete = async (id) => {
     try {
-      fetch(`diplomaback.vercel.app/api/timetableDataDelete/${id}`, {
+      fetch(`https://diplomaback.vercel.app/api/timetableDataDelete/${id}`, {
         method: "DELETE",
       })
         .then(() => {
@@ -146,7 +146,7 @@ export default function Home() {
   const handleDeleteOrder = async (id) => {
 
     try {
-      fetch(`diplomaback.vercel.app/api/order/${id}`, {
+      fetch(`https://diplomaback.vercel.app/api/order/${id}`, {
         method: "DELETE",
       })
         .then(() => {
@@ -167,7 +167,7 @@ export default function Home() {
   };
   const handleSubmit = async (record) => {
     await fetch(
-      `diplomaback.vercel.app/api/order/${record._id}`,
+      `https://diplomaback.vercel.app/api/order/${record._id}`,
       {
         method: "PUT",
         headers: {

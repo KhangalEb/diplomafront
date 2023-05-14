@@ -36,7 +36,7 @@ export default function SignUp() {
   const handleSubmit1 = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("diplomaback.vercel.app/api/register", {
+      const response = await fetch("https://diplomaback.vercel.app/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

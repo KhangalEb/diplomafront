@@ -22,7 +22,7 @@ const Dashboard = () => {
   // const [tempQuote, setTempQuote] = useState();
   async function populate() {
     const token = localStorage.getItem("token");
-    const req = await fetch("diplomaback.vercel.app/api/userData", {
+    const req = await fetch("https://diplomaback.vercel.app/api/userData", {
       method: "POST",
       headers: {
         authorization: `

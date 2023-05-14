@@ -32,7 +32,7 @@ const SignUp = () => {
   const handleSubmit1 = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("diplomaback.vercel.app/api/registerStudent", {
+      const response = await fetch("https://diplomaback.vercel.app/api/registerStudent", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

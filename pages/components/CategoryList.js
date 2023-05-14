@@ -7,7 +7,7 @@ function CategoryList() {
   const router = useRouter();
   const [text, setText] = useState();
   const fetchData = async () => {
-    return fetch("diplomaback.vercel.app/api/subjectData")
+    return fetch("https://diplomaback.vercel.app/api/subjectData")
       .then((response) => response.json())
       .then((data) => setData(data));
   };
@@ -23,7 +23,7 @@ function CategoryList() {
     e.preventDefault();
     console.log(subject)
     try {
-      const response = await fetch("diplomaback.vercel.app/api/teacherListBySubjects", {
+      const response = await fetch("https://diplomaback.vercel.app/api/teacherListBySubjects", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -14,7 +14,7 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("diplomaback.vercel.app/api/teacherList");
+      const response = await fetch("https://diplomaback.vercel.app/api/teacherList");
       const data = await response.json();
       filterData(data);
     };
