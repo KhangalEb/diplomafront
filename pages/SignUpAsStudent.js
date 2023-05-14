@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import axios from "axios";
-import { PageWrapper } from "./components/page-warapper";
+import PageWrapper from "./components/page-warapper";
 import PlainNavbar from "./components/PlainNavbar";
 const SignUp = () => {
   const [email, setEmail] = useState("");

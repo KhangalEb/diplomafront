@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import BackButton from "./components/BackButton";
 import { useRouter } from "next/router"
 import { redirect } from 'next/navigation';
-import { PageWrapper } from "./components/page-warapper"
+import PageWrapper from "./components/page-warapper"
 const Profile = () => {
   const router = useRouter();
   const [userrr, setUserrr] = useState("");

@@ -4,7 +4,7 @@ import PlainNavbar from "./components/PlainNavbar";
 import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import jwt from "jsonwebtoken";
-import { PageWrapper } from "./components/page-warapper";
+import PageWrapper from "./components/page-warapper";
 import Notification from "./components/Notification";
 const Login = () => {
   const [email, setEmail] = useState("");

@@ -3,7 +3,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import PlainNavbar from "../components/PlainNavbar";
 import { useRouter } from "next/router";
-import { PageWrapper } from "../components/page-warapper";
+import PageWrapper from "../components/page-warapper";
 import BackButton from "../components/BackButton";
 const Info = () => {
   const router = useRouter();

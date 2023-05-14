@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import jwt from "jsonwebtoken";
 import BackButton from "./components/BackButton";
-import { PageWrapper } from "./components/page-warapper"
+import PageWrapper from "./components/page-warapper"
 const Profile = () => {
   const router = useRouter();
   const [userrr, setUserrr] = useState("");

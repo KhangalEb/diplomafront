@@ -7,7 +7,7 @@ import TeachersList from "./TeachersList";
 import CategoryList from "./CategoryList";
 import ScheduleList from "./ScheduleList";
 import Navbarr from "./Navbarr";
-import { PageWrapper } from "./page-warapper";
+import PageWrapper from "./page-warapper";
 export default function Home() {
   return (
     <div>

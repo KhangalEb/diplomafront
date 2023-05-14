@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Router, { useRouter } from "next/router";
 import Notification from "../components/Notification";
 import jwt from "jsonwebtoken";
-import { PageWrapper } from "../components/page-warapper";
+import PageWrapper from "../components/page-warapper";
 const FormStudent = () => {
   const router = useRouter();
   const [userrr, setUserrr] = useState("");

@@ -5,7 +5,7 @@ import TeachersList from "./components/TeachersList";
 import NavbarMainHome from "./components/NavbarMainHome";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { PageWrapper } from "./components/page-warapper";
+import PageWrapper from "./components/page-warapper";
 import AboutUs from "./components/AboutUs";
 import { motion } from "framer-motion";
 import Contactus from "./components/ContactUs";

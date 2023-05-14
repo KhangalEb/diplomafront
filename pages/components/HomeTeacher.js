@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import NavbarrTeacher from "./NavbarrTeacher";
 import { useState, useEffect, useCallback } from "react";
 import { DatePicker, Space, Table, Column, Input, Button } from "antd";
-import { PageWrapper } from "./page-warapper";
+import PageWrapper from "./page-warapper";
 import Notification from "./Notification";
 import { useRouter } from "next/router";
 export default function Home() {
