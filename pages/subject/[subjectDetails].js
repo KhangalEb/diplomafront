@@ -60,7 +60,7 @@ const SubjectDetails = () => {
                   <button
                     className="mx-auto block font-bold dark:text-white text-2xl text-center mb-1"
                     key={i._id}
-                    onClick={(e) => router.push(`/teacherprofile/${i._id}`)}
+                    onClick={(e) => { localStorage.setItem("teachername", i.fname); router.push(`/teacherprofile/${i._id}`) }}
                   >
                     {i.fname} {i.lname}
                   </button>

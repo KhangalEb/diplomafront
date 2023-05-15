@@ -12,55 +12,77 @@ const Checkout = () => {
   const { id } = router.query;
   const [datatable, setDataTable] = useState([]);
   const [dataOrder, setDataOrder] = useState([]);
+  const [order, setOrder] = useState([]);
   const [orderTable, setOrderTable] = useState([]);
   const [subject, setSubject] = useState("");
   const [user, setUser] = useState("");
+  const [teacher, setTeacher] = useState("");
   const [form, setForm] = useState([]);
   const [notification, setNotification] = useState({
     message: "",
     success: false,
   });
-  const fetchData = async () => {
+  // console.log(order);
+  const fetchData = async (id) => {
+
+
     setSubject(localStorage.getItem("selectedCourse"));
+
     setUser(JSON.parse(localStorage.getItem("user")));
-    console.log(subject);
+    setTeacher(localStorage.getItem("teachername"))
+    // console.log(subject);
     await fetch("https://diplomaback.vercel.app/api/order")
       .then((response) => response.json())
       .then(async (data) => {
         setDataOrder(data);
+        filterDataaa(data, id);
         return await fetch("https://diplomaback.vercel.app/api/teacherList")
           .then((response) => response.json())
           .then(async (teacherData) => {
-            filterData(teacherData, data);
+            filterData(teacherData, order);
             return await fetch("https://diplomaback.vercel.app/api/timetableData")
               .then((response) => response.json())
               .then((orderdata) => {
-                filterDataa(orderdata, data);
+                filterDataa(orderdata, id);
               });
           });
       })
+    // .catch((error) => console.log("Error fetching data:", error));
 
-      .catch((error) => console.log("Error fetching data:", error));
   };
-  const filterDataa = async (orderdata, dataOrder) => {
-    const filteredDataTable = orderdata.filter((i) => {
-      return i._id === dataOrder[0].datatable;
+  const filterDataaa = async (data, id) => {
+    // console.log(data);
+    const filteredDataTable = data.filter((i) => {
+      // console.log(id);
+      // console.log(i.datatable);
+      return i.datatable === id;
     });
-    console.log("filteredDataTable:", filteredDataTable);
+    // console.log("filteredDataTableeeeeeeeeeeeeeeeee:", filteredDataTable);
+    setOrder(filteredDataTable);
+  };
+
+  const filterDataa = async (orderdata, id) => {
+    // console.log(orderdata)
+    const filteredDataTable = orderdata.filter((i) => {
+      // console.log(id)
+      // console.log(i._id)
+      return i._id === id;
+    });
+    // console.log("filteredDataTable:", filteredDataTable);
     setOrderTable(filteredDataTable);
   };
-  console.log("ene :::::::", dataOrder);
+
+  // console.log("ene :::::::", dataOrder);
   const filterData = async (teacherData, dataOrder) => {
     const filteredData = teacherData.filter((i) => {
-      return i._id === dataOrder[0].teacher;
+      return i._id === order.teacher;
     });
-    console.log("filteredData:", filteredData);
+    // console.log("filteredData:", filteredData);
     setDataTable(filteredData);
   };
   useEffect(() => {
-    fetchData();
-  }, []);
-  console.log(form);
+    fetchData(id);
+  }, [id]);
   console.log(orderTable);
   const handleClick = async (id) => {
     const response = await fetch(
@@ -88,8 +110,6 @@ const Checkout = () => {
     }
     const data = await response.json();
 
-    // Do something with the response data
-    console.log(data);
   };
   return (
     <div>
@@ -113,20 +133,20 @@ const Checkout = () => {
                 <div className="text-left mb-6">
                   <div className="text-md">Хичээлийн нэр: {subject}</div>
                   <div className="text-md">
-                    Үнэ: {datatable[0] && datatable[0].price}
+                    Үнэ: {order[0] && order[0].price}
                   </div>
                   <div className="text-md">
-                    Багш: {datatable[0] && datatable[0].fname}
+                    Багш: {teacher}
                   </div>
                   <div className="text-md">
                     Хичээлийн цаг:{" "}
-                    {dataOrder[0] &&
-                      moment(dataOrder[0].sdate).format(
+                    {order[0] &&
+                      moment(order[0].sdate).format(
                         "YYYY-MM-DD HH:mm"
                       )}{" "}
                     -{" "}
-                    {dataOrder[0] &&
-                      moment(dataOrder[0].edate).format("YYYY-MM-DD HH:mm")}
+                    {order[0] &&
+                      moment(order[0].edate).format("YYYY-MM-DD HH:mm")}
                   </div>
                 </div>
 
@@ -146,7 +166,7 @@ const Checkout = () => {
                   <div className="mt-4">
                     <button
                       className="font-medium text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow-sm transition duration-150 ease-in-out w-full bg-indigo-500 hover:bg-indigo-600 text-white focus:outline-none focus-visible:ring-2 bg-1 border-1"
-                      onClick={() => handleClick(dataOrder[0].datatable)}
+                      onClick={() => handleClick(orderTable[0]._id)}
                     >
                       Баталгаажуулах
                     </button>
