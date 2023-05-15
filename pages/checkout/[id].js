@@ -2,11 +2,12 @@ import BackButton from "../components/BackButton";
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/router";
 import { Table, Space } from "antd";
-import moment from "moment";
+import moment from "moment-timezone";
 import { Collapse } from "antd";
 import Navbarr from "../components/Navbarr";
 import Footer from "../components/Footer";
 import Notification from "../components/Notification";
+import 'moment-timezone';
 const Checkout = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -118,14 +119,9 @@ const Checkout = () => {
                     Багш: {teacher}
                   </div>
                   <div className="text-md">
-                    Хичээлийн цаг:{" "}
-                    {orderTable[0] &&
-                      moment(orderTable[0].sdate).format(
-                        "YYYY-MM-DD HH:mm"
-                      )}{" "}
-                    -{" "}
-                    {orderTable[0] &&
-                      moment(orderTable[0].edate).format("YYYY-MM-DD HH:mm")}
+                    Хичээлийн цаг:
+                    {orderTable[0] && moment(orderTable[0].sdate).utc().format('YYYY-MM-DD HH:mm')} -{' '}
+                    {orderTable[0] && moment(orderTable[0].edate).utc().format('YYYY-MM-DD HH:mm')}
                   </div>
                 </div>
 
