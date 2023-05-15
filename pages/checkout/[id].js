@@ -10,7 +10,6 @@ import Notification from "../components/Notification";
 const Checkout = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [datatable, setDataTable] = useState([]);
   const [dataOrder, setDataOrder] = useState([]);
   const [order, setOrder] = useState([]);
   const [orderTable, setOrderTable] = useState([]);
@@ -36,50 +35,30 @@ const Checkout = () => {
       .then(async (data) => {
         setDataOrder(data);
         filterDataaa(data, id);
-        return await fetch("https://diplomaback.vercel.app/api/teacherList")
+        return await fetch("https://diplomaback.vercel.app/api/timetableData")
           .then((response) => response.json())
-          .then(async (teacherData) => {
-            filterData(teacherData, order);
-            return await fetch("https://diplomaback.vercel.app/api/timetableData")
-              .then((response) => response.json())
-              .then((orderdata) => {
-                filterDataa(orderdata, id);
-              });
+          .then((orderdata) => {
+            filterDataa(orderdata, id);
           });
+
       })
-    // .catch((error) => console.log("Error fetching data:", error));
 
   };
   const filterDataaa = async (data, id) => {
-    // console.log(data);
     const filteredDataTable = data.filter((i) => {
-      // console.log(id);
-      // console.log(i.datatable);
       return i.datatable === id;
     });
-    // console.log("filteredDataTableeeeeeeeeeeeeeeeee:", filteredDataTable);
     setOrder(filteredDataTable);
   };
 
   const filterDataa = async (orderdata, id) => {
-    // console.log(orderdata)
     const filteredDataTable = orderdata.filter((i) => {
-      // console.log(id)
-      // console.log(i._id)
       return i._id === id;
     });
-    // console.log("filteredDataTable:", filteredDataTable);
     setOrderTable(filteredDataTable);
   };
 
   // console.log("ene :::::::", dataOrder);
-  const filterData = async (teacherData, dataOrder) => {
-    const filteredData = teacherData.filter((i) => {
-      return i._id === order.teacher;
-    });
-    // console.log("filteredData:", filteredData);
-    setDataTable(filteredData);
-  };
   useEffect(() => {
     fetchData(id);
   }, [id]);
@@ -140,13 +119,13 @@ const Checkout = () => {
                   </div>
                   <div className="text-md">
                     Хичээлийн цаг:{" "}
-                    {order[0] &&
-                      moment(order[0].sdate).format(
+                    {orderTable[0] &&
+                      moment(orderTable[0].sdate).format(
                         "YYYY-MM-DD HH:mm"
                       )}{" "}
                     -{" "}
-                    {order[0] &&
-                      moment(order[0].edate).format("YYYY-MM-DD HH:mm")}
+                    {orderTable[0] &&
+                      moment(orderTable[0].edate).format("YYYY-MM-DD HH:mm")}
                   </div>
                 </div>
 
