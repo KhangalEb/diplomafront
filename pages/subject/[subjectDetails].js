@@ -16,7 +16,6 @@ const SubjectDetails = () => {
   const router = useRouter();
   const { subjectDetails } = router.query;
   const [dataa, setData] = useState([]);
-  console.log(subjectDetails);
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       router.push("/");
@@ -24,11 +23,11 @@ const SubjectDetails = () => {
 
       setData(JSON.parse(localStorage.getItem("FilteredTeachers")))
     }
-  });
-  const handleClick = ((i) => {
-    localStorage.setItem("teachername", i.fname);
-    router.push(`/teacherprofile/${i._id}`)
-  })
+  }, []);
+  const handleClick = async (i) => {
+    console.log("Clicked:", i.fname);
+    await router.push(`/teacherprofile/${i._id}`);
+  };
   return (
     <div>
       <Head>
