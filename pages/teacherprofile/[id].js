@@ -74,8 +74,8 @@ export default function TeacherProfile() {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                        edate: moment(record.edate).utc.format("YYYY-MM-DD HH:mm"),
-                        sdate: moment(record.sdate).utc.format("YYYY-MM-DD HH:mm"),
+                        edate: moment(record.edate).utc().format("YYYY-MM-DD HH:mm"),
+                        sdate: moment(record.sdate).utc().format("YYYY-MM-DD HH:mm"),
                         teacher: record.teacher,
                         datatable: record._id,
                         subject: subject,
