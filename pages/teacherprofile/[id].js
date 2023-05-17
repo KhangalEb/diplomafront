@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { Table, Space } from "antd";
 import moment from "moment";
 import { Collapse } from 'antd';
-
+import Notification from "../components/Notification";
 export default function TeacherProfile() {
     const router = useRouter();
     const { id } = router.query;
@@ -14,10 +14,27 @@ export default function TeacherProfile() {
     const [dataatable, setDatatable] = useState([]);
     const [subject, setSubject] = useState("");
     const [dataaa, setDataaa] = useState("")
+    const [notification, setNotification] = useState({
+        message: "",
+        success: false,
+    });
     const { Panel } = Collapse;
+    useEffect(() => {
+        if (!notification.message) return;
+
+        const timer = setTimeout(() => {
+            setNotification({
+                message: "",
+                success: false,
+            });
+        }, 3000);
+
+
+        return () => clearTimeout(timer);
+    }, [notification]);
     const fetchData = async () => {
         setSubject(localStorage.getItem("selectedCourse"));
-        return fetch("https://diplomaback.vercel.app/api/teacherList")
+        return fetch("https://diplomaback.vercel.app/teacherList")
             .then((response) => response.json())
             .then((data) => setData(data));
     };
@@ -49,37 +66,45 @@ export default function TeacherProfile() {
     const handleClick = async (record) => {
         console.log(record);
         console.log(dataa);
-        try {
-            const response = await fetch("https://diplomaback.vercel.app/api/order", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    edate: moment(record.edate).utc().format("YYYY-MM-DD HH:mm"),
-                    sdate: moment(record.sdate).utc().format("YYYY-MM-DD HH:mm"),
-                    teacher: record.teacher,
-                    datatable: record._id,
-                    subject: subject,
-                    user: dataaa._id,
-                    userEmail: dataaa.email,
-                    userPnum1: dataaa.pnum1,
-                    userPnum2: dataaa.pnum2,
-                    userName: dataaa.fname,
-                    price: datateacher.price,
-                    dateCreated: moment().format("YYYY-MM-DD HH:mm"),
-                    link: "",
+        if (subject) {
+            try {
+                const response = await fetch("https://diplomaback.vercel.app/order", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        edate: moment(record.edate).format("YYYY-MM-DD HH:mm"),
+                        sdate: moment(record.sdate).format("YYYY-MM-DD HH:mm"),
+                        teacher: record.teacher,
+                        datatable: record._id,
+                        subject: subject,
+                        user: dataaa._id,
+                        userEmail: dataaa.email,
+                        userPnum1: dataaa.pnum1,
+                        userPnum2: dataaa.pnum2,
+                        userName: dataaa.fname,
+                        price: datateacher.price,
+                        dateCreated: moment().format("YYYY-MM-DD HH:mm"),
+                        link: "",
 
-                }),
-            });
-            const data = await response.json();
-            if (data.status === "ok") {
-                router.push(`/checkout/${record._id}`)
+                    }),
+                });
+                const data = await response.json();
+                if (data.status === "ok") {
+                    router.push(`/checkout/${record._id}`)
+                }
+                console.log(data);
+            } catch (error) {
+                console.log(error);
             }
-            console.log(data);
-        } catch (error) {
-            console.log(error);
+        } else {
+            setNotification({
+                message: "Хичээл сонгоогүй байна",
+                success: false,
+            });
         }
+
     }
     const columns = [
         {
@@ -115,7 +140,7 @@ export default function TeacherProfile() {
         setDatatable(fData);
     };
     const fetchDataa = useCallback(async () => {
-        const response = await fetch("https://diplomaback.vercel.app/api/timetableData");
+        const response = await fetch("https://diplomaback.vercel.app/timetableData");
         const data = await response.json();
         console.log(data);
 
@@ -127,6 +152,13 @@ export default function TeacherProfile() {
             fetchDataa();
         }
     }, [datateacher]);
+    const handleClick1 = ((i) => {
+        localStorage.setItem("selectedCourse", i)
+        setNotification({
+            message: "Амжилттай",
+            success: true,
+        });
+    })
     return (
         <div>
             <Navbarr />
@@ -145,6 +177,12 @@ export default function TeacherProfile() {
                             Хүйс: {datateacher.gender}
                         </p>
                         <p className="mt-2 text-gray-500">Аймаг/Хот: {datateacher.province}</p>
+                    </div>
+                    <div>
+                        Заадаг хичээлүүд:
+                        {datateacher.subject && datateacher.subject.map((i) => {
+                            return <button className=" bg-1 m-4 rounded text-0" onClick={() => handleClick1(i)}>{i}</button>
+                        })}
                     </div>
                     <div className="mt-12 flex flex-col justify-center">
                         <p className="text-gray-600 text-center font-light lg:px-16">
