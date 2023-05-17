@@ -25,7 +25,7 @@ const SubjectDetails = () => {
     }
   }, []);
   const handleClick = async (i) => {
-    console.log("Clicked:", i.fname);
+    localStorage.setItem("teachername", i.fname);
     await router.push(`/teacherprofile/${i._id}`);
   };
   return (
