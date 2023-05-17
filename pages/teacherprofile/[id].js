@@ -163,6 +163,10 @@ export default function TeacherProfile() {
         <div>
             <Navbarr />
             <BackButton />
+            <Notification
+                message={notification.message}
+                success={notification.success}
+            />
             <div className="p-8 container flex justify-center mx-auto">
                 <div className="p-8 bg-50 shadow mt-2">
                     <div className=" text-center border-b pb-12">
