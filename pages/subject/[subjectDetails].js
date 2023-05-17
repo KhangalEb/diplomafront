@@ -14,12 +14,14 @@ import PageWrapper from "../components/page-warapper";
 const SubjectDetails = () => {
 
   const router = useRouter();
-  const { subjectdetails } = router.query;
+  const { subjectDetails } = router.query;
   const [dataa, setData] = useState([]);
+  console.log(subjectDetails);
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       router.push("/");
     } else {
+
       setData(JSON.parse(localStorage.getItem("FilteredTeachers")))
     }
   });
@@ -39,7 +41,7 @@ const SubjectDetails = () => {
       <PageWrapper>
         <BackButton />
         <h1 className="relative xl:text-4xl text-3xl text-center text-gray-800  font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto pt-4 z-10">
-          {subjectdetails}
+          {subjectDetails}
         </h1>
         {dataa.map((i, ind) => {
           return (
