@@ -166,18 +166,28 @@ export default function Home() {
     setInputValue(e.target.value);
   };
   const handleSubmit = async (record) => {
-    await fetch(
-      `https://diplomaback.vercel.app/api/order/${record._id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          link: inputValue,
-        }),
-      }
-    );
+    try {
+      await fetch(
+        `https://diplomaback.vercel.app/api/order/${record._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            link: inputValue,
+          }),
+        }
+
+      );
+    } catch (error) {
+      console.log(error)
+    }
+    setNotification({
+      message: "Амжилттай илгээгдлээ",
+      success: true,
+    });
+
   };
   const columns = [
     {
