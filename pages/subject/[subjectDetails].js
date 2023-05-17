@@ -16,9 +16,6 @@ const SubjectDetails = () => {
   const router = useRouter();
   const { subjectdetails } = router.query;
   const [dataa, setData] = useState([]);
-  // const teacherlist = [];
-  // teacherlist.push(JSON.parse(localStorage.getItem("FilteredTeacher")));
-  // console.log(JSON.parse(localStorage.getItem("FilteredTeacher")));
   useEffect(() => {
     if (localStorage.getItem("token") === null) {
       router.push("/");
@@ -26,14 +23,10 @@ const SubjectDetails = () => {
       setData(JSON.parse(localStorage.getItem("FilteredTeachers")))
     }
   });
-  // const fetchData = async () => {
-  //   return fetch("https://diplomaback.vercel.app/api/teacherListBySubjects",)
-  //     .then((response) => response.json())
-  //     .then((data) => setData(data));
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  const handleClick = ((i) => {
+    localStorage.setItem("teachername", i.fname);
+    router.push(`/teacherprofile/${i._id}`)
+  })
   return (
     <div>
       <Head>
@@ -60,7 +53,7 @@ const SubjectDetails = () => {
                   <button
                     className="mx-auto block font-bold dark:text-white text-2xl text-center mb-1"
                     key={i._id}
-                    onClick={(e) => { localStorage.setItem("teachername", i.fname); router.push(`/teacherprofile/${i._id}`) }}
+                    onClick={() => handleClick(i)}
                   >
                     {i.fname} {i.lname}
                   </button>
