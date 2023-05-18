@@ -262,27 +262,31 @@ export default function Home() {
     {
       title: "Link",
       key: "link",
-      render: (text, record, index) => (
-        <div className="flex align-middle">
-          <Input defaultValue={tableData[index].link} onChange={handleInputChange} />
-          <Button
-            style={{ backgroundColor: "green", color: "white" }}
-            onClick={() => handleSubmit(record)}
-          >
+      width: 300,
+      render: (text, record, index) => {
+        console.log(dataTable[index].link);
+        return (
+          <div className="flex align-middle">
+            <Input defaultValue={dataTable[index].link} onChange={handleInputChange} />
+            <Button
+              style={{ backgroundColor: "green", color: "white" }}
+              onClick={() => handleSubmit(record)}
+            >
 
-            Илгээх
-          </Button>
-          <Button
-            style={{ backgroundColor: "red", color: "white" }}
-            onClick={() => {
-              record.edate <= moment().format("YYYY-MM-DD HH:mm") ? handleDeleteOrder(record._id) : setNotification({
-                message: "Амжилтгүй: Тухайн хичээл нь заагдаж дуусаагүй байна.",
-                success: false,
-              });
-            }}
-          >Устгах</Button>
-        </div>
-      ),
+              Илгээх
+            </Button>
+            <Button
+              style={{ backgroundColor: "red", color: "white" }}
+              onClick={() => {
+                record.edate <= moment().format("YYYY-MM-DD HH:mm") ? handleDeleteOrder(record._id) : setNotification({
+                  message: "Амжилтгүй: Тухайн хичээл нь заагдаж дуусаагүй байна.",
+                  success: false,
+                });
+              }}
+            >Устгах</Button>
+          </div>
+        )
+      },
     }
   ];
   return (
